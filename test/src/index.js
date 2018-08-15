@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './game.css'
+
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -9,6 +10,11 @@ function Square(props) {
   );
 }
 
+function nextStep(){
+
+    return parseInt(String(Math.random()*8));
+
+  }
 class Board extends React.Component {
   renderSquare(i) {
     return (
@@ -55,6 +61,9 @@ class Game extends React.Component {
       xIsNext: true
     };
   }
+  componentDidMount(){
+    this.handleClick(nextStep)
+  }
 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -72,7 +81,10 @@ class Game extends React.Component {
       ]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext
-    });
+    }),()=>{
+
+    }
+
   }
 
   jumpTo(step) {
